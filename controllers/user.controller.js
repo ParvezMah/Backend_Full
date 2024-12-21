@@ -1,4 +1,5 @@
 import { User } from "../models/user";
+import bcrypt from "bcrypt";
 
 async (req, res)=> {
     try {
@@ -18,11 +19,12 @@ async (req, res)=> {
                 message:"this email id already registered.",
             })
         }
+        const hashedPassword = await bcrypt.hash(password, 10)
 
         await User.create({
             fullname,
             email,
-            password
+            password: hashedPassword
         })
 
         return res.status(201).json({
