@@ -40,6 +40,10 @@ export const register = async (req, res)=> {
 
 export const login = async (req, res)=>{
     try {
+
+        console.log("Client Request : ", req.rawHeaders)
+        res.set("ChannelName", "PatelMernStack");
+
         const {email, password} = req.body;
         if(!email || !password){
             return res.status(403).json({
